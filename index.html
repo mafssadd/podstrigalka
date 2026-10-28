@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подстригалка — груминг в Одинцово (демо-версия)</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Денис Стрепенюк, +7 977 393-80-33">
+<meta name="description" content="Зоосалон «Подстригалка» в Одинцово: груминг собак и кошек, стрижка, мойка, вычес, тримминг, экспресс-линька. Онлайн-запись, Telegram, WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf6ef; --card:#ffffff; --ink:#2b2420; --muted:#7a6d64;
+    --accent:#e2704f; --accent-dark:#c55a3b; --soft:#f6e3d3; --mint:#d9ece4;
+    --radius:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:17px}
+  a{color:inherit}
+  h1,h2,h3{font-family:Unbounded,sans-serif;line-height:1.15}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+  /* шапка */
+  header{position:sticky;top:0;z-index:10;background:rgba(251,246,239,.9);backdrop-filter:blur(8px);border-bottom:1px solid #eee3d8}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:Unbounded;font-weight:700;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:8px}
+  .logo svg{width:26px;height:26px;fill:var(--accent)}
+  .nav-links{display:flex;gap:4px}
+  .nav-links a{text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;padding:7px 12px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
+  .nav-links a:hover{color:var(--ink);background:var(--soft)}
+  .nav-links a.active{color:#fff;background:var(--accent)}
+  .nav-phone{font-weight:700;text-decoration:none;white-space:nowrap}
+  :root{--hh:65px}
+  section{scroll-margin-top:var(--hh)}
+  @media (max-width:1020px) and (min-width:861px){.nav-phone{display:none}}
+
+  /* кнопки */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:700;text-decoration:none;transition:.2s;border:2px solid transparent}
+  .btn-main{background:var(--accent);color:#fff}
+  .btn-main:hover{background:var(--accent-dark)}
+  .btn-ghost{border-color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:#fff}
+
+  /* первый экран */
+  .hero{padding:70px 0 60px}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--card);padding:8px 16px;border-radius:999px;font-size:15px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:22px}
+  .stars{color:#f2b33d;letter-spacing:2px}
+  .hero h1{font-size:clamp(34px,5vw,56px);margin-bottom:20px}
+  .hero h1 span{color:var(--accent)}
+  .hero p{font-size:19px;color:var(--muted);max-width:520px;margin-bottom:30px}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+  .hero-art{position:relative;aspect-ratio:1;background:var(--soft);border-radius:48% 52% 45% 55%/55% 45% 55% 45%;display:grid;place-items:center}
+  .hero-dog{width:82%;animation:bob 3.2s ease-in-out infinite}
+  .hero-dog svg{width:100%;height:auto;display:block}
+  .hero-dog .eyes{transform-box:fill-box;transform-origin:center;animation:blink 4.5s infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+  @keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+  .hero-art .chip{position:absolute;background:var(--card);border-radius:16px;padding:10px 16px;font-weight:700;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+  .chip.c1{top:8%;left:-4%}
+  .chip.c2{top:38%;right:-6%}
+  .chip.c3{bottom:4%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:background .2s}
+  .chip.c3:hover{background:var(--accent)}
+  .chip.c3 b{display:inline-block;animation:nudge 1.4s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+  @media (prefers-reduced-motion:reduce){.hero-dog,.hero-dog .eyes,.chip.c3 b{animation:none}}
+
+  /* демо-метки */
+  .wm{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.07}
+  .demo-pill{position:fixed;left:16px;bottom:16px;z-index:51;background:rgba(43,36,32,.88);color:#fff;border-radius:14px;padding:9px 14px;font-size:13px;line-height:1.35;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .demo-pill b{color:#ffb79f}
+  .credit{margin-top:6px;font-weight:600;color:var(--ink)}
+  .credit a{text-decoration:none}
+
+  /* секции */
+  section{padding:70px 0}
+  .sec-title{font-size:clamp(26px,3.5vw,38px);margin-bottom:12px}
+  .sec-sub{color:var(--muted);margin-bottom:40px;max-width:600px}
+
+  /* вкладки услуг */
+  .tabs{display:inline-flex;gap:6px;background:var(--card);padding:6px;border-radius:999px;box-shadow:0 2px 12px rgba(0,0,0,.05);margin-bottom:28px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{border:0;background:transparent;font:inherit;font-weight:700;font-size:15px;color:var(--muted);padding:10px 20px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:.2s}
+  .tab:hover{color:var(--ink)}
+  .tab.on{background:var(--accent);color:#fff}
+  .panel[hidden]{display:none}
+  .panel{animation:fadeUp .35s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .svc .breeds{font-size:14px;color:var(--muted);margin:-6px 0 14px}
+  .svc li b{color:var(--ink);font-weight:700;white-space:nowrap}
+  .extras{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;background:var(--card);border-radius:var(--radius);padding:12px 30px;box-shadow:0 2px 14px rgba(0,0,0,.04)}
+  .ex{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px dashed #eadbcd}
+  .ex span{color:var(--ink)}
+  .ex b{white-space:nowrap}
+  .price-foot{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:22px}
+  .price-foot .note{margin-top:0;flex:1;min-width:260px}
+
+  /* услуги */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .svc{background:var(--card);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;box-shadow:0 2px 14px rgba(0,0,0,.04)}
+  .svc .ico{width:52px;height:52px;border-radius:16px;background:var(--soft);display:grid;place-items:center;margin-bottom:20px}
+  .svc .ico svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .svc h3{font-size:19px;margin-bottom:12px}
+  .svc ul{list-style:none;color:var(--muted);font-size:15px;margin-bottom:22px;flex:1}
+  .svc li{padding-left:20px;position:relative;margin-bottom:6px}
+  .svc li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .price{font-family:Unbounded;font-size:24px;font-weight:700}
+  .price small{font-family:Manrope;font-size:15px;color:var(--muted);font-weight:500}
+  .note{margin-top:22px;font-size:15px;color:var(--muted);background:var(--card);border-radius:16px;padding:16px 20px;border-left:4px solid var(--accent)}
+
+  /* почему мы */
+  .why{background:var(--mint)}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .why-item{background:rgba(255,255,255,.7);border-radius:var(--radius);padding:28px}
+  .why-item .num{font-family:Unbounded;font-size:40px;font-weight:700;color:var(--accent);margin-bottom:6px}
+  .why-item p{color:var(--muted)}
+
+  /* галерея */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .ph{aspect-ratio:1;border-radius:18px;background:repeating-linear-gradient(45deg,var(--soft),var(--soft) 12px,#f1d9c6 12px,#f1d9c6 24px);display:grid;place-items:center;color:var(--muted);font-size:14px;font-weight:600;text-align:center;padding:10px}
+  .ph:nth-child(1){grid-column:span 2;grid-row:span 2}
+
+  /* как записаться */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+  .step{background:var(--card);border-radius:var(--radius);padding:28px;position:relative}
+  .step::before{counter-increment:s;content:counter(s);font-family:Unbounded;font-weight:700;width:42px;height:42px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;margin-bottom:16px}
+  .step h3{font-size:17px;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:15px}
+
+  /* контакты */
+  .contacts{display:grid;grid-template-columns:1fr 1.2fr;gap:24px}
+  .c-card{background:var(--card);border-radius:var(--radius);padding:34px}
+  .c-row{margin-bottom:22px}
+  .c-row .lbl{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+  .c-row .val{font-size:19px;font-weight:700}
+  .c-row a.val{text-decoration:none}
+  .messengers{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .msg{padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;color:#fff}
+  .msg.tg{background:#2aa3df}.msg.wa{background:#25c165}.msg.mx{background:#6b4cf5}
+  .map{border-radius:var(--radius);overflow:hidden;min-height:380px;background:var(--soft)}
+  .map iframe{width:100%;height:100%;min-height:380px;border:0;display:block}
+
+  footer{padding:30px 0 40px;color:var(--muted);font-size:14px;text-align:center}
+
+  /* преображение при прокрутке */
+  .tf-intro{padding-bottom:0}
+  .transform{height:320vh;position:relative}
+  .tf-sticky{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px}
+  .tf-stage{position:relative;width:min(100%,62vh);aspect-ratio:1;background:var(--soft);border-radius:36px;overflow:hidden;justify-self:center}
+  .tf-stage svg{width:100%;height:100%;display:block}
+  .tf-label{position:absolute;top:16px;left:16px;background:var(--card);border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .tf-steps{list-style:none}
+  .tf-step{padding:16px 0 16px 24px;border-left:3px solid #eadbcd;opacity:.35;transition:opacity .4s,border-color .4s}
+  .tf-step.on{opacity:1;border-color:var(--accent)}
+  .tf-step h3{font-size:20px;margin-bottom:6px}
+  .tf-step p{color:var(--muted)}
+  .tf-bar{height:6px;border-radius:3px;background:#eadbcd;margin-top:24px;overflow:hidden}
+  .tf-bar i{display:block;height:100%;width:0;background:var(--accent)}
+
+  /* карусель */
+  .carousel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px calc(50% - 150px) 20px;scrollbar-width:none;cursor:grab;user-select:none;-webkit-user-select:none}
+  .carousel.dragging{cursor:grabbing;scroll-snap-type:none}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel .ph{flex:0 0 300px;scroll-snap-align:center;transition:transform .25s ease-out,opacity .25s;will-change:transform}
+  .car-nav{display:flex;justify-content:center;align-items:center;gap:18px}
+  .car-btn{width:52px;height:52px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);font-size:22px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+  .car-btn:hover:not(:disabled){background:var(--ink);color:#fff}
+  .car-btn:disabled{opacity:.25;cursor:default}
+  .car-dots{display:flex;gap:8px}
+  .car-dots i{width:8px;height:8px;border-radius:50%;background:#e2d2c4;transition:.25s}
+  .car-dots i.on{background:var(--accent);width:22px;border-radius:4px}
+
+  /* график */
+  .hours{display:grid;grid-template-columns:auto auto;gap:4px 18px;font-size:16px;font-weight:600;width:max-content}
+  .hours .off{color:var(--accent)}
+
+  .perks{display:flex;flex-wrap:wrap;gap:8px}
+  .perk{background:var(--bg);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600}
+
+  /* плавающая кнопка на телефоне */
+  .float-cta{display:none}
+
+  @media (max-width:860px){
+    :root{--hh:112px}
+    .nav{flex-wrap:wrap;height:auto;padding-top:12px}
+    .nav-links{order:3;width:calc(100% + 40px);margin:8px -20px 0;padding:0 20px 10px;overflow-x:auto;scrollbar-width:none;gap:6px}
+    .nav-links::-webkit-scrollbar{display:none}
+    .nav-links a{background:var(--card);color:var(--ink);font-size:14px;padding:7px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+    .nav-links a.active{background:var(--accent);color:#fff}
+    .hero{padding:40px 0}
+    .hero-grid,.contacts{grid-template-columns:1fr}
+    .hero-art{max-width:360px;margin:0 auto;width:100%}
+    .services,.why-grid,.steps,.extras{grid-template-columns:1fr}
+    .extras{padding:6px 20px}
+    .tab{padding:9px 16px;font-size:14px}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .transform{height:280vh}
+    .tf-sticky{grid-template-columns:1fr;align-content:center;gap:22px}
+    .tf-stage{width:min(82vw,44vh)}
+    .tf-step:not(.on){display:none}
+    .tf-step{border-left:none;padding:0;text-align:center}
+    .carousel{padding:10px calc(50% - 120px) 30px}
+    .carousel .ph{flex-basis:240px}
+    section{padding:50px 0}
+    .float-cta{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;justify-content:center;box-shadow:0 8px 24px rgba(226,112,79,.45)}
+    footer{padding-bottom:150px}
+    .demo-pill{left:16px;right:16px;bottom:84px;text-align:center;font-size:12px;padding:7px 12px}
+    .chip.c2{right:-2%;top:auto;bottom:24%}
+    .chip.c1{left:-2%}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">
+      <svg viewBox="0 0 24 24"><circle cx="6" cy="9" r="2.4"/><circle cx="10" cy="5.5" r="2.4"/><circle cx="14" cy="5.5" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M12 11c-3.5 0-6.5 4.5-6.5 7 0 2 1.6 2.8 3.2 2.3 1.2-.4 2.2-.8 3.3-.8s2.1.4 3.3.8c1.6.5 3.2-.3 3.2-2.3 0-2.5-3-7-6.5-7z"/></svg>
+      Подстригалка
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Цены</a>
+      <a href="#why">Отзывы</a>
+      <a href="#gallery">Преображение</a>
+      <a href="#works">Работы</a>
+      <a href="#booking">Запись</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="nav-phone" href="tel:+79004841679">+7 900 484-16-79</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="badge"><span class="stars">★★★★★</span> 5.0 на Яндекс Картах · 449 оценок</div>
+        <h1>Груминг собак и кошек <span>в Одинцово</span></h1>
+        <p>Стрижём, моем и вычёсываем собак любых пород — от йорков до маламутов — и кошек, включая мейн-кунов. Тримминг, экспресс-линька, когти, ушки и зубы. Бережно, аккуратно и с любовью к хвостатым.</p>
+        <div class="hero-btns">
+          <a class="btn btn-main" href="https://dikidi.net/1799680" target="_blank" rel="noopener">Записаться онлайн</a>
+          <a class="btn btn-ghost" href="https://t.me/podstrigalka" target="_blank" rel="noopener">Написать в Telegram</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <!-- тот же пёс, что в блоке "Как проходит визит", в финальном виде; в рабочей версии можно заменить на фото -->
+        <div class="hero-dog" id="heroDog"></div>
+        <div class="chip c1">✂️ Стрижка и тримминг</div>
+        <div class="chip c2">🛁 Мойка и вычес</div>
+        <a class="chip c3" href="#gallery">Смотрите преображение <b>↓</b></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <h2 class="sec-title">Услуги и цены</h2>
+      <p class="sec-sub">Больше 160 услуг для собак и кошек. Ниже — основные, с минимальной ценой. Итоговая стоимость зависит от размера, породы и состояния шерсти.</p>
+      <div class="tabs" role="tablist">
+        <button class="tab on" role="tab" data-tab="dogs">🐶 Собаки</button>
+        <button class="tab" role="tab" data-tab="cats">🐱 Кошки</button>
+        <button class="tab" role="tab" data-tab="extra">✨ Дополнительно</button>
+      </div>
+      <div class="panel" id="p-dogs">
+        <div class="services">
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg></div>
+          <h3>Шпицы</h3>
+          <p class="breeds">Померанские, немецкие, японские, помски</p><ul><li>Комплекс без стрижки — <b>от 2 300 ₽</b></li><li>Стрижка до 3,5 кг — <b>от 2 800 ₽</b></li><li>Стрижка крупного шпица — <b>от 3 500 ₽</b></li></ul>
+          <div class="price"><small>от</small> 2 300 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></div>
+          <h3>Декоративные породы</h3>
+          <p class="breeds">Йорки, мальтезе, той-пудели, бишоны, ши-тцу, чихуахуа</p><ul><li>Гигиена без мойки — <b>от 900 ₽</b></li><li>Мойка без стрижки — <b>от 1 800 ₽</b></li><li>Модельная стрижка — <b>от 2 700 ₽</b></li></ul>
+          <div class="price"><small>от</small> 900 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/></svg></div>
+          <h3>Метисы и спаниели</h3>
+          <p class="breeds">Стрижка и вычес с учётом веса и шерсти</p><ul><li>Стрижка метиса — <b>от 2 700 ₽</b></li><li>Спаниели — <b>от 2 600 ₽</b></li><li>Вычес с мойкой — <b>от 3 000 ₽</b></li></ul>
+          <div class="price"><small>от</small> 2 600 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="5" rx="2"/><path d="M6 10v8M9 10v8M12 10v8M15 10v8M18 10v8"/></svg></div>
+          <h3>Тримминг и шнауцеры</h3>
+          <p class="breeds">Терьеры, шнауцеры, грифоны</p><ul><li>Стрижка шнауцера без тримминга — <b>от 2 800 ₽</b></li><li>Тримминг терьеров — <b>от 3 000 ₽</b></li><li>Тримминг шнауцеров — <b>от 3 700 ₽</b></li></ul>
+          <div class="price"><small>от</small> 2 800 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12a8 8 0 0 0 16 0M7 12V6a3 3 0 0 1 6 0"/><path d="M8 20l-1 2M16 20l1 2"/></svg></div>
+          <h3>Экспресс-линька</h3>
+          <p class="breeds">Короткошёрстные: мопсы, корги, лабрадоры, джек-расселы</p><ul><li>Мелкие породы — <b>от 2 300 ₽</b></li><li>Корги — <b>от 3 400 ₽</b></li><li>Лабрадоры и ретриверы — <b>от 4 500 ₽</b></li></ul>
+          <div class="price"><small>от</small> 2 300 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 20c0-6 4-11 9-11s9 5 9 11"/><path d="M8 9V5l3 2 2-3v5"/></svg></div>
+          <h3>Крупные породы</h3>
+          <p class="breeds">Овчарки, хаски, самоеды, маламуты, чау-чау</p><ul><li>Стаффорды, доберманы — <b>от 3 500 ₽</b></li><li>Овчарки, хаски — <b>от 4 500 ₽</b></li><li>Самоеды, чау-чау — <b>от 6 000 ₽</b></li></ul>
+          <div class="price"><small>от</small> 3 500 ₽</div>
+        </div>
+        </div>
+      </div>
+      <div class="panel" id="p-cats" hidden>
+        <div class="services">
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 20V9l-1-5 4 3h8l4-3-1 5v11z"/><circle cx="9.5" cy="12" r=".6"/><circle cx="14.5" cy="12" r=".6"/><path d="M11 15.5h2"/></svg></div>
+          <h3>Стрижка кошек</h3>
+          <p class="breeds">Кроме мейн-кунов</p><ul><li>До 8 кг без мойки — <b>от 2 200 ₽</b></li><li>До 8 кг с мойкой — <b>от 2 800 ₽</b></li><li>Свыше 8 кг — <b>от 2 500 ₽</b></li></ul>
+          <div class="price"><small>от</small> 2 200 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="5" rx="2"/><path d="M6 10v8M9 10v8M12 10v8M15 10v8M18 10v8"/></svg></div>
+          <h3>Вычес кошек</h3>
+          <p class="breeds">Убираем подшёрсток и колтуны</p><ul><li>Без мойки — <b>от 1 900 ₽</b></li><li>С мойкой — <b>от 2 800 ₽</b></li></ul>
+          <div class="price"><small>от</small> 1 900 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 20c0-6 4-11 9-11s9 5 9 11"/><path d="M8 9V5l3 2 2-3v5"/></svg></div>
+          <h3>Мейн-куны</h3>
+          <p class="breeds">И другие коты крупнее 8 кг</p><ul><li>Вычес без мойки — <b>от 2 300 ₽</b></li><li>Стрижка без мойки — <b>от 2 500 ₽</b></li><li>Стрижка с мойкой — <b>от 3 300 ₽</b></li></ul>
+          <div class="price"><small>от</small> 2 300 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12a8 8 0 0 0 16 0M7 12V6a3 3 0 0 1 6 0"/><path d="M8 20l-1 2M16 20l1 2"/></svg></div>
+          <h3>Котята и бесшёрстные</h3>
+          <p class="breeds">Деликатная мойка и сушка</p><ul><li>Мойка бесшёрстной кошки — <b>от 1 500 ₽</b></li><li>Мойка котёнка до 6 месяцев — <b>от 1 700 ₽</b></li></ul>
+          <div class="price"><small>от</small> 1 500 ₽</div>
+        </div>
+        <div class="svc">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></div>
+          <h3>Частичная стрижка и узоры</h3>
+          <p class="breeds">Когда не нужно стричь целиком</p><ul><li>Частичная стрижка — <b>от 800 ₽</b></li><li>Узор на шерсти — <b>от 800 ₽</b></li></ul>
+          <div class="price"><small>от</small> 800 ₽</div>
+        </div>
+        </div>
+      </div>
+      <div class="panel" id="p-extra" hidden>
+        <div class="extras"><div class="ex"><span>Стрижка когтей</span><b>от 300 ₽</b></div><div class="ex"><span>Чистка ушек</span><b>от 200 ₽</b></div><div class="ex"><span>Чистка параанальных желез</span><b>от 200 ₽</b></div><div class="ex"><span>Вычес колтунов</span><b>от 300 ₽</b></div><div class="ex"><span>Стрижка мордочки</span><b>от 700 ₽</b></div><div class="ex"><span>Окантовка лап</span><b>от 600 ₽</b></div><div class="ex"><span>Чистка зубов скалером</span><b>от 600 ₽</b></div><div class="ex"><span>Ультразвуковая чистка зубов</span><b>от 2 400 ₽</b></div><div class="ex"><span>Озонотерапия</span><b>от 400 ₽</b></div><div class="ex"><span>Окрашивание шерсти</span><b>от 600 ₽</b></div></div>
+      </div>
+      <div class="price-foot">
+        <div class="note">Не нашли свою породу? Напишите нам или пришлите фото питомца — подскажем, какая услуга подойдёт, и назовём точную цену.</div>
+        <a class="btn btn-main" href="https://dikidi.net/1799680" target="_blank" rel="noopener">Полный прайс и онлайн-запись</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="why">
+    <div class="wrap">
+      <h2 class="sec-title">Почему к нам возвращаются</h2>
+      <p class="sec-sub">Мы не придумываем красивые слова — за нас говорят владельцы, которые уже были в салоне. Больше 350 отзывов на Яндекс Картах.</p>
+      <div class="why-grid">
+        <div class="why-item"><div class="num">5.0</div><p>Средняя оценка на Яндекс Картах по 449 оценкам</p></div>
+        <div class="why-item"><div class="num">до 11 лет</div><p>Опыт наших мастеров — от 2 до 11 лет в груминге</p></div>
+        <div class="why-item"><div class="num">99%</div><p>Положительных отзывов о работе мастеров</p></div>
+      </div>
+      <p style="margin-top:28px"><a class="btn btn-ghost" href="https://yandex.ru/maps/org/podstrigalka/212048477931/reviews/" target="_blank" rel="noopener">Читать отзывы на Яндексе</a></p>
+    </div>
+  </section>
+
+  <!-- Блок "преображение": сейчас нарисованная собака, в рабочей версии можно заменить на серию реальных фото одного питомца -->
+  <section id="gallery" class="tf-intro">
+    <div class="wrap">
+      <h2 class="sec-title">Как проходит визит</h2>
+      <p class="sec-sub">Прокрутите вниз и посмотрите, что происходит с питомцем у нас в салоне.</p>
+    </div>
+    <div class="transform" id="tf">
+      <div class="wrap tf-sticky">
+        <div class="tf-stage"><div id="tfDog"></div><div class="tf-label" id="tfLabel">До</div></div>
+        <div>
+          <ol class="tf-steps">
+            <li class="tf-step on"><h3>Мойка</h3><p>Моем и бережно сушим, смываем всю уличную грязь.</p></li>
+            <li class="tf-step"><h3>Вычес</h3><p>Убираем лишний подшёрсток и аккуратно разбираем колтуны.</p></li>
+            <li class="tf-step"><h3>Стрижка</h3><p>Стрижём по телу, приводим в порядок когти и ушки.</p></li>
+            <li class="tf-step"><h3>Готово!</h3><p>Домой возвращается чистый, пушистый и довольный питомец — пёс или кот.</p></li>
+          </ol>
+          <div class="tf-bar"><i id="tfBar"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <h2 class="sec-title">Наши работы</h2>
+      <p class="sec-sub">Хвостики после визита в салон.</p>
+    </div>
+    <!-- заменить .ph на <img> с реальными фото работ -->
+    <div class="carousel" id="carousel">
+      <div class="ph">Фото работы</div>
+      <div class="ph">Фото работы</div>
+      <div class="ph">Фото работы</div>
+      <div class="ph">Фото работы</div>
+      <div class="ph">Фото работы</div>
+      <div class="ph">Фото работы</div>
+    </div>
+    <div class="car-nav">
+      <button class="car-btn" id="carPrev" aria-label="Назад">←</button>
+      <div class="car-dots" id="carDots"></div>
+      <button class="car-btn" id="carNext" aria-label="Вперёд">→</button>
+    </div>
+  </section>
+
+  <section id="booking">
+    <div class="wrap">
+      <h2 class="sec-title">Как записаться</h2>
+      <p class="sec-sub">Всё просто — три шага.</p>
+      <div class="steps">
+        <div class="step"><h3>Выберите удобный способ</h3><p>Онлайн-запись с выбором мастера и времени, Telegram, WhatsApp, Max или звонок.</p></div>
+        <div class="step"><h3>Расскажите о питомце</h3><p>Порода, примерный размер и что хотите сделать. Можно приложить фото — так проще назвать цену.</p></div>
+        <div class="step"><h3>Приходите в назначенное время</h3><p>Каштановая улица, 4 — там же, где пункт Ozon, рядом с остановкой «27-й км Минского шоссе».</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="wrap">
+      <h2 class="sec-title">Контакты</h2>
+      <p class="sec-sub">Ждём вас и вашего хвостатого.</p>
+      <div class="contacts">
+        <div class="c-card">
+          <div class="c-row"><div class="lbl">Адрес</div><div class="val">Одинцово, ул. Каштановая, 4</div><div style="color:var(--muted);font-size:15px">там же, где пункт Ozon</div></div>
+          <div class="c-row"><div class="lbl">Телефон</div><a class="val" href="tel:+79004841679">+7 (900) 484-16-79</a></div>
+          <div class="c-row"><div class="lbl">Часы работы</div><div class="hours"><span>Пн – Пт</span><span>10:00 – 20:00</span><span>Суббота</span><span>9:30 – 21:00</span><span>Воскресенье</span><span class="off">выходной</span></div></div>
+          <div class="c-row"><div class="lbl">Удобно</div>
+            <div class="perks"><span class="perk">Оплата картой и онлайн</span><span class="perk">Парковка</span><span class="perk">Подарочные сертификаты</span><span class="perk">Собаки и кошки</span><span class="perk">Онлайн-запись</span></div>
+          </div>
+          <div class="c-row"><div class="lbl">Написать</div>
+            <div class="messengers">
+              <a class="msg tg" href="https://t.me/podstrigalka" target="_blank" rel="noopener">Telegram</a>
+              <a class="msg wa" href="https://wa.me/message/F4GK62HG2ZPBO1" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="msg mx" href="https://max.ru/%D0%97%D0%BE%D0%BE%D1%81%D0%B0%D0%BB%D0%BE%D0%BD%D0%9F%D0%BE%D0%B4%D1%81%D1%82%D1%80%D0%B8%D0%B3%D0%B0%D0%BB%D0%BA%D0%B0" target="_blank" rel="noopener">Max</a>
+            </div>
+          </div>
+          <div class="hero-btns"><a class="btn btn-main" href="https://dikidi.net/1799680" target="_blank" rel="noopener">Записаться онлайн</a>
+          <a class="btn btn-ghost" href="https://yandex.ru/maps/org/podstrigalka/212048477931/" target="_blank" rel="noopener">Маршрут</a></div>
+        </div>
+        <div class="map">
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=37.266629%2C55.653343&z=16&pt=37.266629%2C55.653343%2Cpm2rdm" title="Подстригалка на карте" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© Зоосалон «Подстригалка», Одинцово
+    <div class="credit">Демо-версия сайта · Разработка: Денис Стрепенюк · <a href="tel:+79773938033">+7 977 393-80-33</a></div>
+  </div>
+</footer>
+
+<a class="btn btn-main float-cta" href="https://dikidi.net/1799680" target="_blank" rel="noopener">Записаться онлайн</a>
+
+<script>
+(function(){
+  const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  const bump=(p,a,b)=>{const t=(p-a)/(b-a);return t<0||t>1?0:Math.sin(t*Math.PI)};
+  const mixC=(c1,c2,t)=>`rgb(${c1.map((v,i)=>Math.round(lerp(v,c2[i],t))).join(',')})`;
+
+  // фиксированный "шум", чтобы шерсть всегда торчала одинаково
+  let seed=11; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  const nBody=Array.from({length:46},rnd), nHead=Array.from({length:38},rnd), nTail=Array.from({length:20},rnd);
+
+  // пушистый круг: чем больше amp, тем лохматее
+  function blob(cx,cy,r,amp,noise){
+    const n=noise.length,pts=[];
+    for(let i=0;i<n;i++){
+      const a=i/n*Math.PI*2, k=(i%2?1:-.35)*(.6+.8*noise[i]), rr=r+amp*k;
+      pts.push([cx+rr*Math.cos(a),cy+rr*Math.sin(a)]);
+    }
+    const mid=(i,j)=>[(pts[i][0]+pts[j][0])/2,(pts[i][1]+pts[j][1])/2];
+    const s=mid(n-1,0); let d=`M${s[0].toFixed(1)} ${s[1].toFixed(1)}`;
+    for(let i=0;i<n;i++){const m=mid(i,(i+1)%n);d+=` Q${pts[i][0].toFixed(1)} ${pts[i][1].toFixed(1)} ${m[0].toFixed(1)} ${m[1].toFixed(1)}`}
+    return d+'Z';
+  }
+
+  // p = 0 (до) … 1 (после)
+  function dog(p){
+    const cut=clamp((p-.65)/.3);
+    const amp=p<.35?28:p<.65?lerp(28,16,(p-.35)/.3):lerp(16,3,cut);
+    const fur=mixC([222,206,186],[255,250,243],clamp(p/.35));
+    const mats=1-clamp((p-.35)/.25);
+    const bub=bump(p,.03,.37), combT=(p-.35)/.3, comb=bump(p,.35,.65), sc=bump(p,.63,.95), scT=(p-.63)/.32;
+    const bow=clamp((p-.9)/.08);
+    const bodyR=lerp(98,86,cut), headR=lerp(74,64,cut);
+    const st='stroke="#2b2420" stroke-width="3" stroke-linejoin="round"';
+    let s=`<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">`;
+    s+=`<ellipse cx="200" cy="360" rx="120" ry="14" fill="#2b2420" opacity=".08"/>`;
+    s+=`<path d="${blob(300,232,30,amp*.7,nTail)}" fill="${fur}" ${st}/>`;
+    s+=`<circle cx="152" cy="338" r="22" fill="${fur}" ${st}/><circle cx="248" cy="338" r="22" fill="${fur}" ${st}/>`;
+    s+=`<path d="${blob(200,258,bodyR,amp,nBody)}" fill="${fur}" ${st}/>`;
+    // колтуны
+    s+=`<g fill="none" stroke="#8a6f5a" stroke-width="3" stroke-linecap="round" opacity="${(mats*.7).toFixed(2)}">
+        <path d="M150 250 q8 -10 16 0 t16 0"/><path d="M215 300 q6 -8 12 0 t12 0"/><path d="M240 235 q7 -9 14 0"/><path d="M160 300 q6 -8 12 0"/></g>`;
+    s+=`<path d="M152 118 L140 62 L186 100Z" fill="${fur}" ${st}/><path d="M248 118 L260 62 L214 100Z" fill="${fur}" ${st}/>`;
+    s+=`<path d="${blob(200,162,headR,amp*.8,nHead)}" fill="${fur}" ${st}/>`;
+    s+=`<g class="eyes"><circle cx="176" cy="156" r="7" fill="#2b2420"/><circle cx="224" cy="156" r="7" fill="#2b2420"/>
+        <circle cx="178.5" cy="153.5" r="2.2" fill="#fff"/><circle cx="226.5" cy="153.5" r="2.2" fill="#fff"/></g>
+        <ellipse cx="200" cy="178" rx="8" ry="6" fill="#2b2420"/>
+        <path d="M190 190 q10 ${lerp(2,10,bow).toFixed(1)} 20 0" fill="none" stroke="#2b2420" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="160" cy="180" r="8" fill="#f3b3a0" opacity="${lerp(.3,.9,p).toFixed(2)}"/><circle cx="240" cy="180" r="8" fill="#f3b3a0" opacity="${lerp(.3,.9,p).toFixed(2)}"/>`;
+    // пена
+    if(bub>0){
+      s+=`<g fill="#fff" stroke="#9cc9e0" stroke-width="2.5" opacity="${bub.toFixed(2)}">`;
+      [[110,210,16],[300,170,12],[290,300,18],[120,320,11],[200,90,10],[95,150,9],[320,250,10],[200,330,13]].forEach(([x,y,r],i)=>{
+        s+=`<circle cx="${x}" cy="${(y-bub*10*(i%3)).toFixed(1)}" r="${r}"/>`});
+      s+='</g>';
+    }
+    // расчёска
+    if(comb>0){
+      const x=lerp(110,270,clamp(combT));
+      s+=`<g opacity="${comb.toFixed(2)}" transform="translate(${x.toFixed(1)} 214) rotate(-12)">
+          <rect x="0" y="0" width="70" height="14" rx="5" fill="#e2704f" stroke="#2b2420" stroke-width="2.5"/>`;
+      for(let i=0;i<8;i++) s+=`<rect x="${4+i*8.4}" y="13" width="3.5" height="16" rx="1.5" fill="#2b2420"/>`;
+      s+='</g>';
+    }
+    // ножницы
+    if(sc>0){
+      const a=lerp(-2.6,-.3,clamp(scT)), x=200+150*Math.cos(a), y=200+150*Math.sin(a)+60;
+      s+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="46" text-anchor="middle" opacity="${sc.toFixed(2)}">✂️</text>`;
+    }
+    // бантик и блёстки
+    if(bow>0){
+      s+=`<g transform="translate(200 226) scale(${bow.toFixed(2)})"><path d="M0 0 L-26 -14 L-26 14Z M0 0 L26 -14 L26 14Z" fill="#e2704f" stroke="#2b2420" stroke-width="2.5" stroke-linejoin="round"/><circle r="7" fill="#e2704f" stroke="#2b2420" stroke-width="2.5"/></g>
+          <g fill="#f2b33d" opacity="${bow.toFixed(2)}" font-size="26"><text x="80" y="110">✦</text><text x="310" y="130">✦</text><text x="330" y="300">✦</text><text x="60" y="270">✦</text></g>`;
+    }
+    return s+'</svg>';
+  }
+
+  // меню: точная высота шапки + подсветка раздела, который сейчас на экране
+  const header=document.querySelector('header'), navBox=document.querySelector('.nav-links'),
+        navLinks=[...navBox.querySelectorAll('a')],
+        navSecs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
+  const setHH=()=>document.documentElement.style.setProperty('--hh',header.offsetHeight+'px');
+  setHH(); addEventListener('resize',setHH);
+  let activeIdx=-2;
+  function navUpdate(){
+    const line=header.offsetHeight+80; let idx=-1;
+    navSecs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=line) idx=i});
+    if(innerHeight+scrollY>=document.documentElement.scrollHeight-4) idx=navSecs.length-1;
+    if(idx===activeIdx) return; activeIdx=idx;
+    navLinks.forEach((a,i)=>a.classList.toggle('active',i===idx));
+    if(idx>=0 && navBox.scrollWidth>navBox.clientWidth){
+      const a=navLinks[idx];
+      navBox.scrollTo({left:a.offsetLeft-navBox.clientWidth/2+a.offsetWidth/2,behavior:'smooth'});
+    }
+  }
+  addEventListener('scroll',()=>requestAnimationFrame(navUpdate),{passive:true}); navUpdate();
+
+  // вкладки услуг
+  const tabs=[...document.querySelectorAll('.tab')];
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.toggle('on',x===t));
+    document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!=='p-'+t.dataset.tab);
+  }));
+
+  // пёс на первом экране — финальный вид из блока преображения
+  document.getElementById('heroDog').innerHTML=dog(1);
+
+  // демо-метки: водяной знак на всю страницу и плашка с контактами разработчика
+  const DEV='Денис Стрепенюк', DEV_TEL='+7 977 393-80-33';
+  const wmSvg=`<svg xmlns="http://www.w3.org/2000/svg" width="440" height="280"><g transform="rotate(-24 220 140)" fill="#2b2420" font-family="Arial,sans-serif" text-anchor="middle"><text x="220" y="130" font-size="34" font-weight="700" letter-spacing="4">ДЕМО-ВЕРСИЯ</text><text x="220" y="164" font-size="16">${DEV} · ${DEV_TEL}</text></g></svg>`;
+  function addDemo(){
+    if(!document.getElementById('wmk')){
+      const w=document.createElement('div'); w.id='wmk'; w.className='wm';
+      w.style.backgroundImage=`url("data:image/svg+xml,${encodeURIComponent(wmSvg)}")`;
+      document.body.appendChild(w);
+    }
+    if(!document.getElementById('dpill')){
+      const a=document.createElement('a'); a.id='dpill'; a.className='demo-pill'; a.href='tel:'+DEV_TEL.replace(/[^+\d]/g,'');
+      a.innerHTML=`Демо-версия · сайт сделал <b>${DEV}</b> · <span style="white-space:nowrap">${DEV_TEL}</span>`;
+      document.body.appendChild(a);
+    }
+  }
+  addDemo();
+  new MutationObserver(addDemo).observe(document.body,{childList:true});
+
+  // преображение при прокрутке
+  const tf=document.getElementById('tf'), dogEl=document.getElementById('tfDog'),
+        bar=document.getElementById('tfBar'), label=document.getElementById('tfLabel'),
+        steps=[...document.querySelectorAll('.tf-step')], names=['Мойка','Вычес','Стрижка','После'];
+  let last=-1, ticking=false;
+  function update(){
+    ticking=false;
+    const r=tf.getBoundingClientRect(), total=r.height-window.innerHeight;
+    const p=clamp(-r.top/total);
+    if(Math.abs(p-last)<.002) return; last=p;
+    dogEl.innerHTML=dog(p);
+    bar.style.width=(p*100).toFixed(1)+'%';
+    const idx=p<.35?0:p<.65?1:p<.92?2:3;
+    steps.forEach((s,i)=>s.classList.toggle('on',i===idx));
+    label.textContent=p<.02?'До':names[idx];
+  }
+  const onScroll=()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}};
+  addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll); update();
+
+  // карусель: карточка в центре крупнее, по краям мельче
+  const car=document.getElementById('carousel'), cards=[...car.children],
+        prev=document.getElementById('carPrev'), next=document.getElementById('carNext'),
+        dotsBox=document.getElementById('carDots');
+  cards.forEach(()=>dotsBox.appendChild(document.createElement('i')));
+  const dots=[...dotsBox.children];
+  let current=0;
+  function carUpdate(){
+    const c=car.getBoundingClientRect(), mid=c.left+c.width/2;
+    let best=0, bestD=1e9;
+    cards.forEach((el,i)=>{
+      const r=el.getBoundingClientRect(), dist=Math.abs(r.left+r.width/2-mid), d=Math.min(1,dist/(c.width/2));
+      el.style.transform=`scale(${(1-d*.15).toFixed(3)})`; el.style.opacity=(1-d*.45).toFixed(2);
+      if(dist<bestD){bestD=dist;best=i}
+    });
+    current=best;
+    dots.forEach((d,i)=>d.classList.toggle('on',i===best));
+    prev.disabled=best===0; next.disabled=best===cards.length-1;
+  }
+  const goTo=i=>{
+    const el=cards[clamp(i,0,cards.length-1)];
+    car.scrollTo({left:el.offsetLeft+el.offsetWidth/2-car.clientWidth/2,behavior:'smooth'});
+  };
+  prev.addEventListener('click',()=>goTo(current-1));
+  next.addEventListener('click',()=>goTo(current+1));
+  dots.forEach((d,i)=>d.addEventListener('click',()=>goTo(i)));
+
+  // перетаскивание мышкой на компьютере (на телефоне работает обычный свайп)
+  let down=false, startX=0, startScroll=0, moved=false;
+  car.addEventListener('pointerdown',e=>{
+    if(e.pointerType!=='mouse') return;
+    down=true; moved=false; startX=e.clientX; startScroll=car.scrollLeft;
+    car.setPointerCapture(e.pointerId);
+  });
+  car.addEventListener('pointermove',e=>{
+    if(!down) return;
+    const dx=e.clientX-startX;
+    if(Math.abs(dx)>4){moved=true;car.classList.add('dragging')}
+    car.scrollLeft=startScroll-dx;
+  });
+  const endDrag=()=>{
+    if(!down) return; down=false;
+    if(moved){car.classList.remove('dragging');goTo(current)}
+  };
+  car.addEventListener('pointerup',endDrag); car.addEventListener('pointercancel',endDrag);
+
+  car.addEventListener('scroll',()=>requestAnimationFrame(carUpdate),{passive:true});
+  addEventListener('resize',carUpdate); carUpdate();
+})();
+</script>
+
+</body>
+</html>
